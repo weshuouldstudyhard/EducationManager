@@ -14,13 +14,7 @@
 
 	<bean id="baseService" abstract="true" p:baseDao-ref="baseDao" />
 	<!-- 注入service -->
-	<bean id="loginUserService" class="cn.edu.fjnu.cdio4.xplan.service.impl.LoginUserServiceImpl"
-		parent="baseService" />
-		
-	<bean id="loginAction" class="cn.edu.fjnu.cdio4.xplan.action.LoginAction"
-	 	scope="prototype">
-		<property name="loginUserService" ref="loginUserService"></property>
-	</bean>
+	
 
 
 

@@ -13,7 +13,7 @@ import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
  *@version 1.0
  *@创建时间： 2014-11-12   下午10:01:35
  */
-public abstract class CRUDAction<T> extends BaseAction implements ModelDriven<T>, Preparable {
+public abstract class CRUDAction<T> extends BaseAction implements Preparable {
 	protected Long id;
 
 	public Long getId() {
@@ -44,7 +44,7 @@ public abstract class CRUDAction<T> extends BaseAction implements ModelDriven<T>
 		return SUCCESS;// 访问子类的list方法
 	}
 
-	// employee_list.action是不能成功访问,为了第5天权限只控制execute方法
+	// employee_list.action是不能成功访问,
 	//应为action中的方法，必须是public
 	protected abstract void list() throws Exception;
 

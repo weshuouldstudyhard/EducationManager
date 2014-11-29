@@ -1,0 +1,5 @@
+body{margin:0;padding:0;position:relative;}
+
+.row01 { height:210px; margin-left:160px;margin-top:15px;margin-bottom:2px;width:100%;}
+.overturn { float: left; width: 171px; height: 218px;  margin-left:45px;margin-right:45px;cursor: pointer; text-align: center; } 
+.12_img { position:absolute; width: 10000px; height: 1000px;}

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 /**
  *类的作用：不需要对数据的进行CRUD的action索要继承的父类，
  *继承这个类后，让子类可以直接使用，不用创建对象了
@@ -19,14 +20,17 @@ import com.opensymphony.xwork2.ActionSupport;
  *@author 一叶扁舟
  *@version 1.0
  *@创建时间： 2014-11-12   下午06:09:08
+ * @param <T>
  */
-public abstract class BaseAction extends ActionSupport {
+public abstract class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	// 重定向
 	public static final String RELOAD = "reload";
 	// 重定向到后台主页
 	public static final String MAIN = "main";
 	// 输出json字符串
 	public static final String JSON = "json";
+	//注册字符串
+	public static final String REGISTER = "register";
 	// 存登录session里面key
 	public static final String LOGIN_IN_SESSION = "loginUser";
 

@@ -1,0 +1,36 @@
+/* CSS Document */
+@charset utf-8;html{overflow-x:hidden;overflow-y:scroll}
+body{font:12px/1.5 Tahoma, Helvetica, Arial, sans-serif;color:#666;background-color:#fff;background:#cccccc url(assets/bg_texture_11.png) repeat;}
+body,form,p,ol,ul,p,h1,h2,h3,h4,li,dt,dd,dl,li{margin:0;padding:0}img,fieldset{border:0}
+ul,dl,ol{list-style:none}em,cite{font-style:normal}a:link,a:visited{text-decoration:none;color:#333}
+a:hover{text-decoration:underline;color:#e00}.cl{clear:both}
+.lt{float:left}.rt{float:right}.wap{width:1000px;margin:0 auto}
+
+.logo{padding:22px 0;}
+
+.lo_ct{background:#0088cc;}
+.lo_bg{background:url(../images/bg.jpg) no-repeat #0088cc; height:330px; position:relative;}
+.lo_list{background:#fff; overflow:hidden; position:absolute; right:65px; top:32px; padding-top:20px; width:342px; height:315px;-webkit-box-shadow:0 0 5px rgba(0,0,0,0.3); -moz-box-shadow:0 0 5px rgba(0,0,0,0.3); box-shadow:0 0 5px rgba(0,0,0,0.3);}
+.lo_list li{padding:10px 30px; line-height:20px; overflow:hidden; zoom:1;}
+
+.lo_list li input.us_name,.lo_list li input.us_pwd,.lo_list li input.us_spot{border:#d9d9d9 solid 1px; width:260px; padding:8px 10px; color:#0088cc;}
+.lo_list li input.us_spot{ width:130px;}
+.lo_list li a.lo_bnt{display:block; width:150px; height:40px; line-height:40px; text-align:center; color:#fff; background:#0088cc; font-size:14px; text-decoration:none;}
+.lo_list li a.lo_bnt:hover{background:#0099cc;}
+.lo_list li a.forget{color:#0088cc;}
+.lo_list li a.free_join{line-height:40px; color:#0088cc;}
+.lo_list li input.IsSave{margin-top:4px; _margin-top:0px; float:left;}
+
+.lo_list li span.errotip{position:absolute; left:30px; top:5px; color:#ff3000;}
+.lo_list li a.identifier{position:absolute; right:30px; top:135px; width:130px; height:52px; overflow:hidden;}
+
+p.lo_bt{padding:15px 0; color:#0088cc; text-align:center; text-indent:-100px;}
+p.lo_bt a:link,p.lo_bt a:visited{color:#0088cc;}
+
+.lo_list_text{ position:relative; height:34px; overflow:hidden;}
+.lo_list_text span{ position:absolute; top:10px; left:42px; line-height:36px; line-height:34px; color:#999;}
+.lo_list_text input{ position:absolute; top:10px; left:30px; z-index:2; z-index:20000\9; background:none; color:#333;}
+.lo_ct .lo_list_text input:hover,.lo_ct .lo_list_text input:focus{ border:1px solid #0088cc}
+.lo_list li input.IsSave{margin-top:0\9;}
+.lo_list li a.forget{width:48px;}
+.remberpass{color: #ff3000; float:left; width:148px; overflow:hidden; white-space:nowrap;}

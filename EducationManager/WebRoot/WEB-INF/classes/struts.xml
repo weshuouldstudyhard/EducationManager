@@ -59,19 +59,19 @@
 		
 		<!-- 全局视图，当login -->
 		<global-results>
-			<result name="login">/WEB-INF/views/login.jsp</result>
-			<result name="main" type="redirectAction">employee</result>
+		    <result name="user" type="redirectAction">user</result>
+		    <result name="discussion" type="redirectAction">/WEB-INF/views/discussion_board.jsp</result>
+			<result name="login">/WEB-INF/views/login_in.jsp</result>
+			<result name="logout"></result>
+			<result name="main" type="redirectAction">/WEB-INF/views/home_page.jsp</result>
+			<result name= "register" type="redirectAction">/WEB-INF/views/register.jsp</result>
 		</global-results>
-
-
-
-    	<!-- 登录 -->
-		<action name="login_*" class="loginAction" method="{1}" />
 
 		
 
+
 		<action name="employee_*" class="employeeAction" method="{1}">
-		<result>/WEB-INF/views/employee/employee.jsp</result>
+		   <result>/WEB-INF/views/employee/employee.jsp</result>
 			<!-- 如果出现转换异常:把字符串放到了Integer属性里面 ,默认会跳转到input指向的jsp页面 -->
 			<result name="input">/WEB-INF/views/employee/employee-input.jsp</result>
 			<!-- 对于reload重定向，需要配置传入参数的设置，这些参数都是从jsp页面中传入进来的 -->
@@ -93,7 +93,61 @@
 		
 		
 		
+		<!-- userAction包括用户登录，注册,修改个人信息-->
+		<action name="user_*" class="userAction" method="{1}">
+		   <result>/WEB-INF/views/user/user.jsp</result>
+			<!-- 跳转到注册页面上 -->
+			<result name="register">register</result>
+			<!--跳转到程序的主界面上  -->
+			<result name="main">/WEB-INF/views/home_page.jsp</result>
+		    <!-- 注册成功后跳转到登录界面上 -->
+		   <result name="login">/WEB-INF/views/login_in.jsp</result>
+			<!-- 如果出现转换异常:把字符串放到了Integer属性里面 ,默认会跳转到input指向的jsp页面 -->
+			<result name="input">/WEB-INF/views/{user}/user-input.jsp</result>
+			<!-- product_bill.action->方法ProductAction.bill->返回视图bill -->
+			<result name="{1}">/WEB-INF/views/user/user-{1}.jsp</result>
+			<!-- 对于reload重定向，需要配置传入参数的设置，这些参数都是从jsp页面中传入进来的 -->
+			<result name="reload" type="redirectAction">
+				<!-- 传递请求的url -->
+				<param name="actionName">user</param>
+				<!-- get方式:传递额外的参数:取EmployeeAction里面getBaseQuery().getCurrentPage() -->
+				<param name="baseQuery.currentPage">${baseQuery.currentPage}</param>
+				<param name="baseQuery.pageSize">${baseQuery.pageSize}</param>
+			</result>
+			<result name="json" type="json">
+				<param name="root">#map</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
 		
+		
+		<!-- 登录的逻辑视图 -->
+		<action name="login">
+			 <result >/WEB-INF/views/login_in.jsp</result>
+		</action>
+		
+		
+		<!-- 首页的逻辑视图 -->
+		<action name="register">
+			 <result >/WEB-INF/views/register.jsp</result>
+		</action>
+		
+		
+		<!-- 首页的逻辑视图 -->
+		<action name="homePage">
+			 <result >/WEB-INF/views/home_page.jsp</result>
+		</action>
+		
+		<!-- 讨论区的action -->
+		<action name="discussion">
+			 <result >/WEB-INF/views/discussion_board.jsp</result>
+			 <result name="discussion">/WEB-INF/views/discussion_board.jsp</result>
+		</action>
+		
+		<!-- 下载资源和上传资源的界面的逻辑视图-->
+		<action name="resourcesInfo">
+			 <result>/WEB-INF/views/Resources_Info.jsp</result>
+		</action>
 
 		<!-- 处理其他所有的crud的action -->
 		<action name="*_*" class="{1}Action" method="{2}">

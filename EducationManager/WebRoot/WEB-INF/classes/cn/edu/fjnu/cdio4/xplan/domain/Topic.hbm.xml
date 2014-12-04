@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="cn.edu.fjnu.cdio4.xplan.domain">
+
+	<class name="Topic"> 
+		<id name="id">
+			<generator class="native" />
+		</id>
+     	<property name="title"/>
+		<property name="content" type="text" length="20000"/>
+		<property name="postTime" type="timestamp"/>
+		<property name="ipAddr"/>
+		
+		<!-- user属性，本类与User的多对一,一个人可以发表多个帖子-->
+		<many-to-one name="user" class="User" column="userId"></many-to-one>
+	
+		
+		<property name="type"/>
+		<property name="replyCount"/>
+		<property name="lastUpdateTime" type="timestamp"/>
+		
+		<!-- forum属性，本类与Forum的多对一 ，一个版块包含多个帖子-->
+		<many-to-one name="forum" class="Forum" column="forumId"></many-to-one>
+		
+		<!-- replies属性，本类与Reply的一对多,一个主贴包含多个回复的帖子 -->
+		<set name="replies" table="topic_replies">
+			<key column="topicId"></key>
+			<one-to-many class="Reply" />
+		</set>
+		
+		<!-- lastReply属性，本类与Reply的一对一，因为任何一个帖子必然只有一个最后回复的 -->
+		<many-to-one name="lastReply" class="Reply" column="lastReplyId" unique="true"></many-to-one>	
+    </class>
+</hibernate-mapping>

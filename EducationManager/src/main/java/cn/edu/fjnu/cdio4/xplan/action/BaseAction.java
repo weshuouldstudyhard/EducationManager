@@ -6,6 +6,8 @@ import org.apache.struts2.ServletActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.edu.fjnu.cdio4.xplan.domain.User;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -32,7 +34,7 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 	//注册字符串
 	public static final String REGISTER = "register";
 	// 存登录session里面key
-	public static final String LOGIN_IN_SESSION = "loginUser";
+	public static final String LOGIN_IN_SESSION = "user";
 
 	//日子的输出
 	protected Logger logger = LoggerFactory.getLogger(getClass());
@@ -54,5 +56,21 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 	
 
 	HttpServletRequest request = ServletActionContext.getRequest();
+	
+	
+	/*获取当前的用户登录者*/
+	protected User getLoginUser(){
+		return (User) ActionContext.getContext().getSession().get(LOGIN_IN_SESSION);
+	}
+	
+	/*从作用域中取出数据*/
+	protected Object getContext(String str){
+		return  ActionContext.getContext().get(str);
+	}
 
+	/*将数据放入到session中*/
+	protected Object getSession(String str){
+		return  ActionContext.getContext().getSession().get(str);
+	}
+	
 }

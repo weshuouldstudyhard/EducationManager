@@ -46,10 +46,10 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 	/* (non-Javadoc)
 	 * @see cn.edu.fjnu.cdio4.xplan.service.IUserService#findByLoginUser(java.lang.String, java.lang.String)
 	 */
-	public User findByLoginUser(String name, String password) {
-		//根据用户名和密码同时查询，看是否存在
-		String hql = "select o from User o where o.name=? and o.password=?";
-		List<User> list = findByHql(hql, name, password);
+	public User findByLoginUser(String email, String password) {
+		//根据邮箱和密码同时查询，看是否存在
+		String hql = "select o from User o where o.email =? and o.password=?";
+		List<User> list = findByHql(hql, email, password);
 		if (list.size() == 1) {
 			return list.get(0);
 		}

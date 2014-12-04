@@ -5,13 +5,15 @@
 <!--
  //javascript代码函数，处理上一页，下一页的问题
 function go(no){
-    $("#pageNo").val(no);
+	
+     $("#pageNo").val(no);
     $("#domainForm").submit();
+
 }
 function updateDomain(url,id){
  
  //domainFrom表单的id,attr：属性，即action 属性：employee
-	$("#domainForm").attr("action",url+"_input.action?id="+id);
+	$("#domainForm").attr("action",url+"_showForum.action?id="+id);
     $("#domainForm").submit();
     $("#domainForm").attr("action",url+".action");
 }
@@ -20,11 +22,7 @@ function updateDomain(url,id){
     $("#domainForm").submit();
     $("#domainForm").attr("action",url+".action");
 }
-function downDomain(url){
-	$("#domainForm").attr("action",url+"_download.action");
-    $("#domainForm").submit();
-    $("#domainForm").attr("action",url+".action");
-}
+
 //发出一个ajax删除的请求
 //每次删除并不刷新，而是在当前页中把当前table中的tr给删除了
 function deleteDomain(src,url,idValue){
@@ -69,10 +67,10 @@ function deleteDomain(src,url,idValue){
 							<td>
 								每页${pageResult.pageSize}条记录
 							</td>
-							<td>
+					<!-- 		<td>
 								分页:
 
-							</td>
+							</td> -->
 							<td>
 								<s:if test="pageResult.currentPage==1">
 									<td>
@@ -112,7 +110,7 @@ function deleteDomain(src,url,idValue){
 								<s:textfield id="pageNo" name="baseQuery.currentPage"
 									value="%{pageResult.currentPage}" size="2" />
 								<s:submit value="go" />
-								<s:select list="{5,10}" name="baseQuery.pageSize"
+								<s:select list="{5,10,15,20}" name="baseQuery.pageSize"
 									onchange="document.forms[0].submit();" />
 								<!-- document.forms[0].submit()：document对象拿到所有的表单，但是当前就一个表单，所以{}为第0个然后提交 -->
 							</td>

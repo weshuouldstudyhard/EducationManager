@@ -39,6 +39,10 @@ $().ready(function() {
 		}
 	});
 });
+
+if($("#message").val() !=null){
+  alert($("#message").val());
+};
 //-->
 </script>
       
@@ -52,7 +56,7 @@ $().ready(function() {
 <div class="lo_ct">
     <div class="lo_bg wap">
         <ul class="lo_list">
-            <li class="lo_list_text"><span>用户名</span><input class="us_name" name="name"  onFocus="$(this).prev('span').hide()" onBlur="if(!value){$(this).prev('span').show()}" type="text"></li>
+            <li class="lo_list_text"><span>邮箱</span><input class="us_name" name="email"  onFocus="$(this).prev('span').hide()" onBlur="if(!value){$(this).prev('span').show()}" type="text"></li>
             <li class="lo_list_text"><span>密码</span><input class="us_pwd"   name="password"  value="" onFocus="$(this).prev('span').hide()" onBlur="if(!value){$(this).prev('span').show()}" type="password"></li>
             
             <li>
@@ -64,7 +68,7 @@ $().ready(function() {
                 <span class="errotip" id="ListMsg"></span>
             </li>
            <!-- 显示错误 -->
-			<font color="red"><s:fielderror  fieldName="passwordAndusername"/></font>
+			<font color="red"><s:fielderror  id="message" fieldName="passwordAndusername"  /></font>
             <li>
             	<s:submit action="user_loginCheck" value="登录"></s:submit>
 <!--                 <a class="lo_bnt lt" href="user_loginCheck.action?name=" onClick="submitForm()" title="登录">登录</a>
@@ -75,7 +79,7 @@ $().ready(function() {
     </div>
 </div>
 <p class="lo_bt">
-    <a href="homePage.action">返回首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="mailto:123@studypower.net">联系我们</a><a href="http://"></a></p>
+    <a href="#"></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="mailto:123@studypower.net">联系我们</a><a href="http://"></a></p>
 
 </form>
 

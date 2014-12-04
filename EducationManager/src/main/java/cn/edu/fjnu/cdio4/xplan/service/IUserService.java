@@ -34,6 +34,6 @@ public interface IUserService extends IBaseService<User> {
 	 * @param password 密码
 	 * @return
 	 */
-	public User findByLoginUser(String name, String password);
+	public User findByLoginUser(String email, String password);
 
 }

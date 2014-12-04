@@ -1,8 +1,10 @@
 package cn.edu.fjnu.cdio4.xplan.page;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 
 /**
@@ -98,7 +100,19 @@ public abstract class BaseQuery {
 	}
 
 	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
+		
+		//当传过来的是其他字符的时候要进行判断处理
+/*		String currentPageString = currentPage.toString();
+		System.out.println("BaseQuery:current:PageString"+currentPageString.toString());
+		if(isNumeric(currentPageString)){
+			this.currentPage = Integer.parseInt(currentPageString);
+		}else{
+			this.currentPage = 1;
+			
+		}*/
+		
+		this.currentPage =  currentPage;
+		
 	}
 
 	public int getPageSize() {
@@ -108,6 +122,27 @@ public abstract class BaseQuery {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-		
+	public  boolean isNumeric(String str){ 
+	    Pattern pattern = Pattern.compile("[0-9]*"); 
+	    System.out.println("isNumber"+str.toString());
+	    return pattern.matcher(str).matches();    
+	 }
+	public boolean isFlag() {
+		return flag;
+	}
+	public void setFlag(boolean flag) {
+		this.flag = flag;
+	}
+	public void setHql(StringBuilder hql) {
+		this.hql = hql;
+	}
+	public void setCountHql(StringBuilder countHql) {
+		this.countHql = countHql;
+	}
+	public void setParamList(List paramList) {
+		this.paramList = paramList;
+	} 
+	
+	
 
 }

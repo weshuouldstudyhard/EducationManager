@@ -20,10 +20,10 @@ public class UserServiceTest extends BaseServiceTest {
 
 	@Test
 	public void testSave() throws Exception {
-		User user1 = new User("无悔", "wuhui@163.com", "wuhui");
+		User user1 = new User("无悔", "wuhui@163.com", null);
 		user1.setPassword("wuhui");
 		
-		User user2 = new User("一叶扁舟", "yiyepianzhou@163.com", "yiyepianzhou");
+		User user2 = new User("一叶扁舟", "yiyepianzhou@163.com", null);
 		user2.setPassword("yiyepianzhou");
 		
 		userService.save(user1);

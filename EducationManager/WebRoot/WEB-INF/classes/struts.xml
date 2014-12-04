@@ -6,74 +6,62 @@
 <struts>
 
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
-	
-	<!-- 只针对xxxAction开启OpenSessionInViewFilter,css,js,gif,
-	默认值:st ruts.action.extension=action,,
-	这个自动为请求添加action的后缀
-	 -->
+
+	<!-- 只针对xxxAction开启OpenSessionInViewFilter,css,js,gif, 默认值:st ruts.action.extension=action,, 
+		这个自动为请求添加action的后缀 -->
 	<constant name="struts.action.extension" value="action" />
-	
-	<!--
-	   truts.devMode也就是struts的开发模式，默认值为false，
-	   这里修改为true就可以了，以后一旦就该这个文件中的配置就不用去重启tomcat
-	 -->
+
+	<!-- truts.devMode也就是struts的开发模式，默认值为false， 这里修改为true就可以了，以后一旦就该这个文件中的配置就不用去重启tomcat -->
 	<constant name="struts.devMode" value="true" />
-	
+
 	<!-- 设置表单都是用simple来显示 :默认值struts.ui.theme=xhtml -->
-	<constant name="struts.ui.theme" value="simple"/>
-	
+	<constant name="struts.ui.theme" value="simple" />
+
 	<!-- 修改国际化控制为中文环境，必须停止tomcat，在添加(因为只要一次加载机会) -->
 	<constant name="struts.locale" value="zh_CN" />
-	
-	<!-- 配置了json-default说明返回的类型可以是json对象了
-	对于这个json—default是在文件struts2-json-plugin-2.3.15.3.jar->struts-plugin.xml中 -->
+
+	<!-- 配置了json-default说明返回的类型可以是json对象了 对于这个json—default是在文件struts2-json-plugin-2.3.15.3.jar->struts-plugin.xml中 -->
 	<package name="default" namespace="/" extends="json-default">
 
 		<interceptors>
-		<!-- 自定义一个拦截器栈 -->
+			<!-- 自定义一个拦截器栈 -->
 			<interceptor-stack name="pssStack">
 				<!-- 放到最前面:引用自定义一个权限拦截器 -->
-				<!--<interceptor-ref name="authInterceptor" />
-				--><!-- 基于paramsPrepareParamsStack, 
-				增加store interceptor保证actionMessage在redirect后不会丢失 -->
+				<!--<interceptor-ref name="authInterceptor" /> --><!-- 基于paramsPrepareParamsStack, 增加store interceptor保证actionMessage在redirect后不会丢失 -->
 				<interceptor-ref name="store">
 					<param name="operationMode">AUTOMATIC</param>
 				</interceptor-ref>
-				
-				<!-- 添加默认的拦截器栈defaultStack为paramsPrepareParamsStack
-				paramsPrepareParamsStack:这个拦截器栈的主要目的是：有如下的顺序，
-				   //设置jsp的参数到action
-				 <interceptor-ref name="params"/>
-				 //前置处理功能
-  				 <interceptor-ref name="prepare"/>
-  				 //改变栈顶对象，关键是判断getModel()是否为空，不为空就会调用这个方法设置employee到栈顶
-  				 <interceptor-ref name="modelDriven"/>
-  				 <interceptor-ref name="params"/>
-				
-				 -->
+
+				<!-- 添加默认的拦截器栈defaultStack为paramsPrepareParamsStack paramsPrepareParamsStack:这个拦截器栈的主要目的是：有如下的顺序， 
+					//设置jsp的参数到action <interceptor-ref name="params"/> //前置处理功能 <interceptor-ref 
+					name="prepare"/> //改变栈顶对象，关键是判断getModel()是否为空，不为空就会调用这个方法设置employee到栈顶 <interceptor-ref 
+					name="modelDriven"/> <interceptor-ref name="params"/> -->
 				<interceptor-ref name="paramsPrepareParamsStack" />
 			</interceptor-stack>
 		</interceptors>
 		<!-- 修改默认的拦截器栈为pssStack -->
 		<default-interceptor-ref name="pssStack" />
-		
+
 		<!-- 全局视图，当login -->
 		<global-results>
-		    <result name="user" type="redirectAction">user</result>
-		    <result name="discussion" type="redirectAction">/WEB-INF/views/discussion_board.jsp</result>
+			<result name="user" type="redirectAction">user</result>
+			<result name="discussion" type="redirectAction">/WEB-INF/views/discussion_board.jsp
+			</result>
 			<result name="login">/WEB-INF/views/login_in.jsp</result>
 			<result name="logout"></result>
 			<result name="main" type="redirectAction">/WEB-INF/views/home_page.jsp</result>
-			<result name= "register" type="redirectAction">/WEB-INF/views/register.jsp</result>
+			<result name="register" type="redirectAction">/WEB-INF/views/register.jsp
+			</result>
 		</global-results>
 
-		
+
 
 
 		<action name="employee_*" class="employeeAction" method="{1}">
-		   <result>/WEB-INF/views/employee/employee.jsp</result>
+			<result>/WEB-INF/views/employee/employee.jsp</result>
 			<!-- 如果出现转换异常:把字符串放到了Integer属性里面 ,默认会跳转到input指向的jsp页面 -->
-			<result name="input">/WEB-INF/views/employee/employee-input.jsp</result>
+			<result name="input">/WEB-INF/views/employee/employee-input.jsp
+			</result>
 			<!-- 对于reload重定向，需要配置传入参数的设置，这些参数都是从jsp页面中传入进来的 -->
 			<result name="reload" type="redirectAction">
 				<!-- 传递请求的url -->
@@ -83,25 +71,25 @@
 				<param name="baseQuery.pageSize">${baseQuery.pageSize}</param>
 				<param name="baseQuery.name">${baseQuery.lastName}</param>
 			</result>
-		
+
 			<result name="json" type="json">
 				<param name="root">#map</param>
 				<param name="excludeNullProperties">true</param>
 			</result>
 		</action>
-		
-		
-		
-		
-		<!-- userAction包括用户登录，注册,修改个人信息-->
+
+
+
+
+		<!-- userAction包括用户登录，注册,修改个人信息 -->
 		<action name="user_*" class="userAction" method="{1}">
-		   <result>/WEB-INF/views/user/user.jsp</result>
+			<result>/WEB-INF/views/user/user.jsp</result>
 			<!-- 跳转到注册页面上 -->
 			<result name="register">register</result>
-			<!--跳转到程序的主界面上  -->
+			<!--跳转到程序的主界面上 -->
 			<result name="main">/WEB-INF/views/home_page.jsp</result>
-		    <!-- 注册成功后跳转到登录界面上 -->
-		   <result name="login">/WEB-INF/views/login_in.jsp</result>
+			<!-- 注册成功后跳转到登录界面上 -->
+			<result name="login">/WEB-INF/views/login_in.jsp</result>
 			<!-- 如果出现转换异常:把字符串放到了Integer属性里面 ,默认会跳转到input指向的jsp页面 -->
 			<result name="input">/WEB-INF/views/{user}/user-input.jsp</result>
 			<!-- product_bill.action->方法ProductAction.bill->返回视图bill -->
@@ -119,39 +107,127 @@
 				<param name="excludeNullProperties">true</param>
 			</result>
 		</action>
-		
-		
+
+		<!-- 版块的逻辑视图 -->
+		<action name="forum" class="forumAction">
+			<result>/WEB-INF/views/discussion_board.jsp</result>
+			<!-- 如果出现转换异常:把字符串放到了Integer属性里面 ,默认会跳转到input指向的jsp页面 -->
+			<result name="input">/WEB-INF/views/forum/forum-input.jsp</result>
+			<!-- 对于reload重定向，需要配置传入参数的设置，这些参数都是从jsp页面中传入进来的 -->
+			<result name="reload" type="redirectAction">
+				<!-- 传递请求的url -->
+				<param name="actionName">forum</param>
+				<!-- get方式:传递额外的参数:取EmployeeAction里面getBaseQuery().getCurrentPage() -->
+				<param name="baseQuery.currentPage">${baseQuery.currentPage}</param>
+				<param name="baseQuery.pageSize">${baseQuery.pageSize}</param>
+				<param name="baseQuery.name">${baseQuery.lastName}</param>
+			</result>
+
+			<result name="json" type="json">
+				<param name="root">#map</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+
 		<!-- 登录的逻辑视图 -->
 		<action name="login">
-			 <result >/WEB-INF/views/login_in.jsp</result>
+			<result>/WEB-INF/views/login_in.jsp</result>
 		</action>
-		
-		
-		<!-- 首页的逻辑视图 -->
+		<!--  退出的逻辑视图-->
+		<action name="logout"  class="userAction" method="logOut">
+			<result>/WEB-INF/views/logout.jsp</result>
+		</action>
+
+
+		<!-- 注册的逻辑视图 -->
 		<action name="register">
-			 <result >/WEB-INF/views/register.jsp</result>
+			<result>/WEB-INF/views/register.jsp</result>
 		</action>
-		
-		
+
+
 		<!-- 首页的逻辑视图 -->
 		<action name="homePage">
-			 <result >/WEB-INF/views/home_page.jsp</result>
+			<result>/WEB-INF/views/home_page.jsp</result>
 		</action>
-		
+
 		<!-- 讨论区的action -->
 		<action name="discussion">
-			 <result >/WEB-INF/views/discussion_board.jsp</result>
-			 <result name="discussion">/WEB-INF/views/discussion_board.jsp</result>
+			<result type="redirectAction">forum</result>
 		</action>
-		
-		<!-- 下载资源和上传资源的界面的逻辑视图-->
+
+		<!-- 下载资源和上传资源的界面的逻辑视图 -->
 		<action name="resourcesInfo">
-			 <result>/WEB-INF/views/Resources_Info.jsp</result>
+			<result>/WEB-INF/views/Resources_Info.jsp</result>
 		</action>
+
+
+		<!-- 论坛:版块的action -->
+		<action name="forum_*" class="forumAction" method="{1}">
+			<result>/WEB-INF/views/forum/forum.jsp</result>
+			<result name="showForum">/WEB-INF/views/forum/showForum.jsp</result>
+			<result name="input">/WEB-INF/views/forum/forum-input.jsp</result>
+			<!-- <result name="{1}">/WEB-INF/views/forum/{1}.jsp</result> -->
+			<result name="reload" type="redirectAction">
+				<!-- 传递请求的url -->
+				<param name="actionName">forum_showForum</param>
+				<!-- get方式:传递额外的参数:取EmployeeAction里面getBaseQuery().getCurrentPage() -->
+				<param name="baseQuery.currentPage">${baseQuery.currentPage}</param>
+				<param name="baseQuery.pageSize">${baseQuery.pageSize}</param>
+			</result>
+			<result name="json" type="json">
+				<param name="root">#map</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+
+		<!-- 论坛:主题的action -->
+		<action name="topic_*" class="topicAction" method="{1}">
+			<result name="success">/WEB-INF/views/topic/showTopic.jsp</result>
+			<!-- <result>/WEB-INF/views/topic/topic.jsp</result> -->
+			<result name="showTopic">topic_showTopic</result>
+			<result name="addTopic">/WEB-INF/views/topic/addTopic.jsp</result>
+			<result name="input">/WEB-INF/views/topic/topic-input.jsp</result>
+			<result name="{1}">/WEB-INF/views/topic/{1}.jsp</result>
+			<result name="reload" type="redirectAction">
+				<!-- 传递请求的url -->
+				<param name="actionName">forum_showForum</param>
+				<!-- get方式:传递额外的参数:取EmployeeAction里面getBaseQuery().getCurrentPage() -->
+				<!-- <param name="baseQuery.currentPage">${baseQuery.currentPage}</param> 
+					<param name="baseQuery.pageSize">${baseQuery.pageSize}</param> -->
+			</result>
+			<result name="json" type="json">
+				<param name="root">#map</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+
+		<!-- 论坛:回复的action -->
+		<action name="reply_*" class="replyAction" method="{1}">
+			<result>/WEB-INF/views/reply/reply.jsp</result>
+			<result name="input">/WEB-INF/views/reply/reply-input.jsp</result>
+			<!-- 显示当前回复主题的页面 -->
+			<result name="showTopic" type="redirectAction">
+				<param name="actionName">topic_showTopic</param>
+			</result>
+			<result name="addReply">/WEB-INF/views/reply/addReply.jsp</result>
+			<!-- <result name="{1}">/WEB-INF/views/reply/{1}.jsp</result> -->
+			<result name="reload" type="redirectAction">
+				<!-- 传递请求的url -->
+				<param name="actionName">reply</param>
+				<!-- get方式:传递额外的参数:取EmployeeAction里面getBaseQuery().getCurrentPage() -->
+				<param name="baseQuery.currentPage">${baseQuery.currentPage}</param>
+				<param name="baseQuery.pageSize">${baseQuery.pageSize}</param>
+			</result>
+			<result name="json" type="json">
+				<param name="root">#map</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+
 
 		<!-- 处理其他所有的crud的action -->
 		<action name="*_*" class="{1}Action" method="{2}">
-		<result>/WEB-INF/views/{1}/{1}.jsp</result>
+			<result>/WEB-INF/views/{1}/{1}.jsp</result>
 			<!-- 如果出现转换异常:把字符串放到了Integer属性里面 ,默认会跳转到input指向的jsp页面 -->
 			<result name="input">/WEB-INF/views/{1}/{1}-input.jsp</result>
 			<!-- product_bill.action->方法ProductAction.bill->返回视图bill -->
@@ -169,7 +245,7 @@
 				<param name="excludeNullProperties">true</param>
 			</result>
 		</action>
-		
+
 
 		<!-- <action name="index"> -->
 		<!-- <result type="redirectAction"> -->

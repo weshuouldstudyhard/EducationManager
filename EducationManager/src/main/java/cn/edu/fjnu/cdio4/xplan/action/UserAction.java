@@ -29,7 +29,7 @@ public class UserAction extends CRUDAction<User> {
 	private PageResult<User> pageResult;
 	private UserQuery baseQuery = new UserQuery();
 	private User user  =  new  User();
-	/*用户名*/
+	/*用户名 */
 	private String name;
 	/*邮箱*/
 	private String email;
@@ -102,13 +102,14 @@ public class UserAction extends CRUDAction<User> {
 		System.out.println("UserAction："+user);
 		
 		User inputUser = new User();
-		inputUser.setName(name);
+		inputUser.setEmail(email);
 		inputUser.setPassword(password);
 		//查询这个用户是否存在
-		User loginUser = userService.findByLoginUser(inputUser.getName(),inputUser.getPassword());
+		User loginUser = userService.findByLoginUser(inputUser.getEmail(),inputUser.getPassword());
 		if(loginUser != null){
 			//用户名不为空，放入到actionContext的作用域中，并且跳转到程序的主页面
-			putSession(LOGIN_IN_SESSION, user);
+			
+			putSession(LOGIN_IN_SESSION, loginUser);
 			return MAIN;
 		}
 		addFieldError("passwordAndusername", "用户名或者密码错误");
@@ -116,11 +117,11 @@ public class UserAction extends CRUDAction<User> {
 	}
 	
 	/*当用户注销的时候，进入这个方法中*/
-	public String loginOut(){
+	public String logOut(){
 		/*将登录用户移除作用域，逻辑视图转到一个界面上*/
 		ActionContext.getContext().getSession().remove(LOGIN_IN_SESSION);
-		
-		return null;
+		System.out.println("移除登录用户:"+getSession("user"));
+		return SUCCESS;
 	}
 	
 	/**

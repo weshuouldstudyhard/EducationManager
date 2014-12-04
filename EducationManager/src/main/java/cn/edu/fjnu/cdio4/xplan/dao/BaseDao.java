@@ -148,6 +148,7 @@ public class BaseDao<T> extends HibernateDaoSupport {
 	 * @return  直接放回List,没有T
 	 */
 	public List findByHql(String hql, Object... objects) {
+		System.out.println("hql:"+hql+"objects:"+objects);
 		return getHibernateTemplate().find(hql, objects);
 	}
 
